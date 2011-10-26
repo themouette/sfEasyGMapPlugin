@@ -56,7 +56,6 @@ class GMapMarker
   public function __construct($lat,$lng,$options = array(), $js_name = null,$events=array())
   {
     $js_name = $js_name ? $js_name : 'marker_'.uniqid();
-
     $this->js_name = $js_name;
     $this->setOptions($options);
     $this->setGMapCoord(new GMapCoord($lat,$lng));
@@ -93,7 +92,7 @@ class GMapMarker
   */
   public function getIcon()
   {
-    return null;//return $this->icon;
+    return $this->options['icon '];
   }
   /**
   * @return GMapIcon $icon

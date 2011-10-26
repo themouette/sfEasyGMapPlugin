@@ -17,6 +17,10 @@ class GMapGeocodedAddress
   protected $geocoded_address      = null;
   protected $geocoded_street       = null;
   protected $geocoded_postal_code  = null;
+  protected $geocoded_region = null;
+  protected $geocoded_departement = null;
+
+
 
 
   /**
@@ -85,14 +89,16 @@ class GMapGeocodedAddress
       return false;
     }
 
-    $this->raw_address           = $geocoded_array['Placemark'][0]['address'];
-    $this->accuracy              = $geocoded_array['Placemark'][0]['AddressDetails']['Accuracy'];
-    $this->geocoded_city         = $geocoded_array['Placemark'][0]['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['Locality']['LocalityName'];
-    $this->geocoded_country_code = $geocoded_array['Placemark'][0]['AddressDetails']['Country']['CountryNameCode'];
-    $this->geocoded_country      = $geocoded_array['Placemark'][0]['AddressDetails']['Country']['CountryName'];
-    $this->geocoded_address      = $geocoded_array['Placemark'][0]['address'];
-    $this->geocoded_street       = $geocoded_array['Placemark'][0]['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['Locality']['Thoroughfare']['ThoroughfareName'];
-    $this->geocoded_postal_code  = $geocoded_array['Placemark'][0]['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['Locality']['PostalCode']['PostalCodeNumber'];
+    $this->raw_address                  = $geocoded_array['Placemark'][0]['address'];
+    $this->accuracy                     = $geocoded_array['Placemark'][0]['AddressDetails']['Accuracy'];
+    $this->geocoded_city                = $geocoded_array['Placemark'][0]['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['Locality']['LocalityName'];
+    $this->geocoded_region              = $geocoded_array['Placemark'][0]['AddressDetails']['Country']['AdministrativeArea']['AdministrativeAreaName'];
+    $this->geocoded_departement          = $geocoded_array['Placemark'][0]['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['SubAdministrativeAreaName'];
+    $this->geocoded_country_code        = $geocoded_array['Placemark'][0]['AddressDetails']['Country']['CountryNameCode'];
+    $this->geocoded_country             = $geocoded_array['Placemark'][0]['AddressDetails']['Country']['CountryName'];
+    $this->geocoded_address             = $geocoded_array['Placemark'][0]['address'];
+    $this->geocoded_street              = $geocoded_array['Placemark'][0]['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['Locality']['Thoroughfare']['ThoroughfareName'];
+    $this->geocoded_postal_code         = $geocoded_array['Placemark'][0]['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['Locality']['PostalCode']['PostalCodeNumber'];
 
     return $this->accuracy;
   }
@@ -210,7 +216,6 @@ class GMapGeocodedAddress
    */
   public function getGeocodedCountry()
   {
-
     return $this->geocoded_country;
   }
 
@@ -314,6 +319,45 @@ class GMapGeocodedAddress
   {
     $this->geocoded_postal_code = $val;
   }
+
+
+
+
+
+
+
+  public function getGeocodedRegion()
+  {
+
+    return $this->geocoded_region;
+  }
+
+  /**
+   * Returns the street name normalized by the Google Maps web service
+   * @return string $geocoded_country_code
+   */
+  public function getGeocodedDepartement()
+  {
+
+    return $this->geocoded_departement;
+  }
+
+
+  /**
+   * @param string $val geocoded region
+   */
+  public function setGeocodedRegion($val)
+  {
+    $this->geocoded_region = $val;
+  }
+  /**
+   * @param string $val geocoded departement
+   */
+  public function setGeocodedDepartement($val)
+  {
+    $this->geocoded_departement = $val;
+  }
+
 
 
 }
