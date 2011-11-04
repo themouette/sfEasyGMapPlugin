@@ -89,17 +89,26 @@ class GMapGeocodedAddress
       return false;
     }
 
+  //var_dump($geocoded_array['Placemark'][0]['AddressDetails']['Country']);
     $this->raw_address                  = $geocoded_array['Placemark'][0]['address'];
-    $this->accuracy                     = $geocoded_array['Placemark'][0]['AddressDetails']['Accuracy'];
-    $this->geocoded_city                = $geocoded_array['Placemark'][0]['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['Locality']['LocalityName'];
-    $this->geocoded_region              = $geocoded_array['Placemark'][0]['AddressDetails']['Country']['AdministrativeArea']['AdministrativeAreaName'];
-    $this->geocoded_departement          = $geocoded_array['Placemark'][0]['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['SubAdministrativeAreaName'];
-    $this->geocoded_country_code        = $geocoded_array['Placemark'][0]['AddressDetails']['Country']['CountryNameCode'];
-    $this->geocoded_country             = $geocoded_array['Placemark'][0]['AddressDetails']['Country']['CountryName'];
     $this->geocoded_address             = $geocoded_array['Placemark'][0]['address'];
-    $this->geocoded_street              = $geocoded_array['Placemark'][0]['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['Locality']['Thoroughfare']['ThoroughfareName'];
-    $this->geocoded_postal_code         = $geocoded_array['Placemark'][0]['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['Locality']['PostalCode']['PostalCodeNumber'];
+    $this->accuracy                     = $geocoded_array['Placemark'][0]['AddressDetails']['Accuracy'];
+    $this->geocoded_country             = $geocoded_array['Placemark'][0]['AddressDetails']['Country']['CountryName'];
+    $this->geocoded_country_code        = $geocoded_array['Placemark'][0]['AddressDetails']['Country']['CountryNameCode'];
+    $this->geocoded_region              = $geocoded_array['Placemark'][0]['AddressDetails']['Country']['AdministrativeArea']['AdministrativeAreaName'];
 
+    if (array_key_exists('SubAdministrativeArea', $geocoded_array['Placemark'][0]['AddressDetails']['Country']['AdministrativeArea']))
+    {
+      $this->geocoded_departement         = $geocoded_array['Placemark'][0]['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['SubAdministrativeAreaName'];
+      $this->geocoded_city                = $geocoded_array['Placemark'][0]['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['Locality']['LocalityName'];
+      //Hide error (dirty :) )
+     @$this->geocoded_street              = $geocoded_array['Placemark'][0]['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['Locality']['Thoroughfare']['ThoroughfareName'];
+     @$this->geocoded_postal_code         = $geocoded_array['Placemark'][0]['AddressDetails']['Country']['AdministrativeArea']['SubAdministrativeArea']['Locality']['PostalCode']['PostalCodeNumber'];
+    }
+    else
+    {
+       $this->geocoded_city                = $geocoded_array['Placemark'][0]['AddressDetails']['Country']['AdministrativeArea']['Locality']['LocalityName'];
+    }
     return $this->accuracy;
   }
 
