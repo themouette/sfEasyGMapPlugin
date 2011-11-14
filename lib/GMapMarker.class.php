@@ -56,7 +56,7 @@ class GMapMarker
   public function __construct($lat,$lng,$options = array(), $js_name = null,$events=array())
   {
     $js_name = $js_name ? $js_name : 'marker_'.uniqid();
-    $this->js_name = $js_name;
+    $this->js_name = "markers['".$js_name."']";
     $this->setOptions($options);
     $this->setGMapCoord(new GMapCoord($lat,$lng));
     $this->events  = $events;
