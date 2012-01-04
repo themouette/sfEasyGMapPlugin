@@ -13,7 +13,7 @@ class GMapClient
    * @var sfCache
    */
   protected $cache = null;
-  
+
   /**
    * API key
    *
@@ -28,8 +28,8 @@ class GMapClient
    */
   protected $api_keys = null;
 
-  const API_URL = 'http://maps.google.com/maps/geo?';
-  const JS_URL  = 'http://maps.google.com/maps/api/js?sensor=false';
+  const API_URL = 'https://maps.google.com/maps/geo?';
+  const JS_URL  = 'https://maps.google.com/maps/api/js?sensor=false';
 
   /**
    *

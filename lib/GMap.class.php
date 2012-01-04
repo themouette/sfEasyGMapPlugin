@@ -798,7 +798,7 @@ class GMap
       $pairs[] = $key.'='.$value;
     }
 
-    return 'http://maps.google.com/staticmap?'.implode('&',$pairs);
+    return 'https://maps.googleapis.com/maps/api/staticmap?'.implode('&',$pairs);
   }
 
   /**
